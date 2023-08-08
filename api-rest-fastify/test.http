@@ -1,0 +1,88 @@
+### GET ALL USERS
+GET http://localhost:5000/api/users HTTP/1.1
+
+### GET A USER ? public
+GET http://localhost:5000/api/users/1 HTTP/1.1
+
+### ADD A USER ? public
+POST http://localhost:5000/api/users/new HTTP/1.1
+content-type: application/json
+
+{
+  "title": "New post title",
+  "body": "New post body"
+}
+
+### UPDATE A USER ? public
+PUT http://localhost:5000/api/users/edit/2 HTTP/1.1
+content-type: application/json
+
+{
+  "title": "Updated title",
+  "body": "Updated body"
+}
+
+### DELETE A USER ? public
+DELETE http://localhost:5000/api/users/3 HTTP/1.1
+
+
+### GET ALL PARAMETERS
+GET http://localhost:5000/api/parameters HTTP/1.1
+
+### GET A PARAMETER ? public
+GET http://localhost:5000/api/parameters/5 HTTP/1.1
+
+### ADD A PARAMETER ? public
+POST http://localhost:5000/api/parameters/new HTTP/1.1
+content-type: application/json
+
+{
+  "key": "key1983",
+  "value": "value_1983",
+  "status": 1
+}
+
+### UPDATE A PARAMETER ? public
+PUT http://localhost:5000/api/parameters/edit/2 HTTP/1.1
+content-type: application/json
+
+{
+  "key": "key2023",
+  "value": "value_2023",
+  "status": 0
+}
+
+### DELETE A USER ? public
+DELETE http://localhost:5000/api/parameters/8 HTTP/1.1
+
+
+### endpoint - Cadastro de banco ###
+
+### GET ALL BANKS
+GET http://localhost:5000/api/banks HTTP/1.1
+
+### GET A BANK ? public
+GET http://localhost:5000/api/banks/3 HTTP/1.1
+
+### ADD A BANK ? public
+POST http://localhost:5000/api/banks/new HTTP/1.1
+content-type: application/json
+
+{
+  "key": "key1983",
+  "value": "value_1983",
+  "status": 1
+}
+
+### UPDATE A BANK ? public
+PUT http://localhost:5000/api/banks/edit/2 HTTP/1.1
+content-type: application/json
+
+{
+  "key": "key2023",
+  "value": "value_2023",
+  "status": 0
+}
+
+### DELETE A BANK ? public
+DELETE http://localhost:5000/api/banks/8 HTTP/1.1
