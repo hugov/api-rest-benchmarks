@@ -16,16 +16,6 @@ async function authenticateRoutes(fastify, options) {
 
     })
 
-    /*
-    fastify.get("/protected", {
-            onRequest: [fastify.authenticate]
-        },
-        async function (request, reply) {
-            return request.user
-        }
-    )
-    */
-
 };
   
 module.exports = authenticateRoutes;

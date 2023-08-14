@@ -14,7 +14,7 @@ async function parameterRoutes(fastify, options) {
 
     fastify.get('/api/parameters', {schema: getParametersSchema}, async function (request, reply) {
 
-        DEBUG && console.log('Consultando a lista de parâmetros cadastrados')
+        DEBUG && console.log('Listando os parâmetros cadastrados')
 
         await client.query('SELECT * FROM parameters')
             .then(results => {
@@ -27,7 +27,6 @@ async function parameterRoutes(fastify, options) {
 
     });
   
-    // get a parameter
     fastify.get('/api/parameters/:id', {schema: getParameterSchema}, async function (request, reply) {
 
         DEBUG && console.log('Consultando o parâmetro pelo id')
@@ -40,7 +39,7 @@ async function parameterRoutes(fastify, options) {
                 console.log('Parâmetro: ', parameter);
 
                 if (!parameter) {
-                    return reply.status(404).send(new Error('Parameter not found'));
+                    return reply.status(404).send(new Error('Parâmetro não encontrado'));
                 }
                 
                 return reply.send(parameter);
@@ -48,10 +47,9 @@ async function parameterRoutes(fastify, options) {
 
     });
   
-    // create a new parameter
     fastify.post('/api/parameters/new', {schema: addParameterSchema}, async function (request, reply) {
 
-        DEBUG && console.log('Criando um novo registro de parâmetro')
+        DEBUG && console.log('Adicionando o registro do parâmetro.')
 
         const { key, value, status } = request.body;
 
@@ -64,15 +62,13 @@ async function parameterRoutes(fastify, options) {
         try {
             const {rows} = await client.query(query)
             DEBUG && console.log(rows[0])
-            reply.code(201).send('Parameter added');
-            //reply.send('Parameter added');
+            reply.code(201).send('Parâmetro adicionado com sucesso.');
         } catch (err) {
             throw new Error(err)
         }
 
     });
   
-    // update a parameter
     fastify.put('/api/parameters/edit/:id', {schema: updateParameterSchema}, async function (request, reply) {
 
         console.log('Alterando o registro de um parâmetro')
@@ -96,21 +92,20 @@ async function parameterRoutes(fastify, options) {
             console.log(parameter)
 
             if (!parameter) {
-                return reply.status(404).send(new Error("Parameter doesn't exist"));
+                return reply.status(404).send(new Error('Parâmetro não encontrado'));
             }
 
             reply.code(204)
-            return reply.send('Parameter updated');
+            return reply.send('Parâmetro alterado com sucesso');
         } catch (err) {
             throw new Error(err)
         }
 
     });
   
-    // delete a parameter
     fastify.delete('/api/parameters/:id', {schema: deleteParameterSchema}, async function (request, reply) {
 
-        console.log('Consultando o parâmetro pelo id')
+        console.log('Apagando o registro do parâmetro pelo id')
 
         const { id } = request.params;
 
@@ -121,11 +116,11 @@ async function parameterRoutes(fastify, options) {
             console.log(parameter)
 
             if (!parameter) {
-                return reply.status(404).send(new Error("Parameter doesn't exist"));
+                return reply.status(404).send(new Error('Parâmetro não encontrado'));
             }
 
             reply.code(204)
-            return reply.send('Parameter deleted');
+            return reply.send('Parâmetro deletado com sucesso.');
         } catch(err) {
             throw new Error(err)
         }

@@ -31,14 +31,14 @@ async function bankRoutes(fastify, options) {
 
         await client.query('SELECT * FROM banks WHERE id = $1', [id])
             .then(result => {
-                const parameter = result.rows[0];
-                console.log('Parâmetro: ', parameter);
+                const bank = result.rows[0];
+                console.log('Parâmetro: ', bank);
 
-                if (!parameter) {
+                if (!bank) {
                     return reply.status(404).send(new Error('Banco não encontrado'));
                 }
                 
-                return reply.send(parameter);
+                return reply.send(bank);
             });
 
     });
@@ -84,10 +84,10 @@ async function bankRoutes(fastify, options) {
         try {
             const {rows} = await client.query(query)
 
-            parameter = rows[0]
-            console.log(parameter)
+            bank = rows[0]
+            console.log(bank)
 
-            if (!parameter) {
+            if (!bank) {
                 return reply.status(404).send(new Error('Banco não encontrado'));
             }
 
@@ -108,10 +108,10 @@ async function bankRoutes(fastify, options) {
         try {
             const {rows} = await client.query('DELETE FROM banks WHERE id = $1 RETURNING *', [id])
 
-            parameter = rows[0]
-            console.log(parameter)
+            bank = rows[0]
+            console.log(bank)
 
-            if (!parameter) {
+            if (!bank) {
                 return reply.status(404).send(new Error('Banco não encontrado'));
             }
 
