@@ -14,12 +14,14 @@ async function parameterRoutes(fastify, options) {
 
     fastify.get('/api/parameters', {schema: getParametersSchema}, async function (request, reply) {
 
-        console.log('Consultando a lista de parâmetros cadastrados')
+        DEBUG && console.log('Consultando a lista de parâmetros cadastrados')
 
         await client.query('SELECT * FROM parameters')
             .then(results => {
                 const parameters = results.rows;
-                console.log('results: ' , parameters);
+
+                DEBUG && console.log('results: ' , parameters);
+                
                 reply.send(parameters);
             });
 
@@ -28,7 +30,7 @@ async function parameterRoutes(fastify, options) {
     // get a parameter
     fastify.get('/api/parameters/:id', {schema: getParameterSchema}, async function (request, reply) {
 
-        console.log('Consultando o parâmetro pelo id')
+        DEBUG && console.log('Consultando o parâmetro pelo id')
 
         const { id } = request.params;
 

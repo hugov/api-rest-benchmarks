@@ -31,7 +31,7 @@ const getBankSchema = {
 const addBankSchema = {
   body: {
     type: 'object',
-    required: ['title', 'body'],
+    required: ['code', 'description', 'status'],
     properties: {
       code: { type: 'number' },
       description: { type: 'string' },
@@ -46,7 +46,7 @@ const addBankSchema = {
 const updateBankSchema = {
   body: {
     type: 'object',
-    required: ['title', 'body'],
+    required: ['code', 'description', 'status'],
     properties: {
       code: { type: 'number' },
       description: { type: 'string' },

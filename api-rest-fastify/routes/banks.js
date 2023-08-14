@@ -5,14 +5,19 @@ const {
     updateBankSchema,
     deleteBankSchema,
 } = require('../controllers/schemas/banks.js');
-  
-async function parameterRoutes(fastify, options) {  
+
+async function bankRoutes(fastify, options) {
 
     const client = fastify.db.client
 
     fastify.get('/api/banks', {schema: getBanksSchema}, async function (request, reply) {
 
         console.log('Consultando a lista de bancos cadastrados')
+
+        debugger
+
+        let user = request.user
+        console.log('user: ', user)
 
         await client.query('SELECT * FROM banks')
             .then(results => {
@@ -78,8 +83,8 @@ async function parameterRoutes(fastify, options) {
 
         const query = {
             text:  `UPDATE banks SET 
-                            key = COALESCE($1, key), 
-                            value = COALESCE($2, value), 
+                            code = COALESCE($1, code), 
+                            description = COALESCE($2, description), 
                             status = COALESCE($3, status) 
                             WHERE id = $4 RETURNING *`,
             values : [code, description, status, id]
@@ -127,7 +132,7 @@ async function parameterRoutes(fastify, options) {
         }
 
     });
-  
+
 };
   
-module.exports = parameterRoutes;
+module.exports = bankRoutes;
