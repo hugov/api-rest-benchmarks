@@ -12,12 +12,7 @@ async function bankRoutes(fastify, options) {
 
     fastify.get('/api/banks', {schema: getBanksSchema}, async function (request, reply) {
 
-        console.log('Consultando a lista de bancos cadastrados')
-
-        debugger
-
-        let user = request.user
-        console.log('user: ', user)
+        console.log('Listando os bancos cadastrados')
 
         await client.query('SELECT * FROM banks')
             .then(results => {
@@ -28,7 +23,6 @@ async function bankRoutes(fastify, options) {
 
     });
   
-    // get a parameter
     fastify.get('/api/banks/:id', {schema: getBankSchema}, async function (request, reply) {
 
         console.log('Consultando o banco pelo id')
@@ -41,7 +35,7 @@ async function bankRoutes(fastify, options) {
                 console.log('Parâmetro: ', parameter);
 
                 if (!parameter) {
-                    return reply.status(404).send(new Error('Bank not found'));
+                    return reply.status(404).send(new Error('Banco não encontrado'));
                 }
                 
                 return reply.send(parameter);
@@ -49,10 +43,9 @@ async function bankRoutes(fastify, options) {
 
     });
   
-    // create a new parameter
     fastify.post('/api/banks/new', {schema: addBankSchema}, async function (request, reply) {
 
-        console.log('Criando um novo registro de parâmetro')
+        console.log('Adicionando o registro do banco.')
 
         const { code, description, status } = request.body;
 
@@ -65,15 +58,13 @@ async function bankRoutes(fastify, options) {
         try {
             const {rows} = await client.query(query)
             console.log(rows[0])
-            reply.code(201)
-            reply.send('Bank added');
+            reply.code(201).send('Banco adicionado com sucesso.');
         } catch (err) {
             throw new Error(err)
         }
 
     });
   
-    // update a parameter
     fastify.put('/api/banks/edit/:id', {schema: updateBankSchema}, async function (request, reply) {
 
         console.log('Alterando o registro de um banco')
@@ -97,21 +88,20 @@ async function bankRoutes(fastify, options) {
             console.log(parameter)
 
             if (!parameter) {
-                return reply.status(404).send(new Error("Bank doesn't exist"));
+                return reply.status(404).send(new Error('Banco não encontrado'));
             }
 
             reply.code(204)
-            return reply.send('Bank updated');
+            return reply.send('Banco alterado com sucesso');
         } catch (err) {
             throw new Error(err)
         }
 
     });
   
-    // delete a parameter
     fastify.delete('/api/banks/:id', {schema: deleteBankSchema}, async function (request, reply) {
 
-        console.log('Consultando o banco pelo id')
+        console.log('Apagando o registro do banco pelo id')
 
         const { id } = request.params;
 
@@ -122,11 +112,11 @@ async function bankRoutes(fastify, options) {
             console.log(parameter)
 
             if (!parameter) {
-                return reply.status(404).send(new Error("Bank doesn't exist"));
+                return reply.status(404).send(new Error('Banco não encontrado'));
             }
 
             reply.code(204)
-            return reply.send('Bank deleted');
+            return reply.send('Banco deletado com sucesso.');
         } catch(err) {
             throw new Error(err)
         }
