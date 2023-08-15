@@ -1,11 +1,10 @@
-//const fastify = require('fastify')({ logger: true });
-const fastify = require('fastify')();
-const PORT = process.env.PORT || 5000
+const fastify = require('fastify')({ logger: true });
+//const fastify = require('fastify')()
 
 const dbconnector = require('./config/db')
 const configuration = require('./config/configuration')
 
-fastify.register(dbconnector);
+fastify.register(dbconnector)
 
 fastify.register(require('@fastify/jwt'), {
     secret: configuration.secretKey
@@ -13,8 +12,7 @@ fastify.register(require('@fastify/jwt'), {
 
 fastify.addHook("onRequest", async (request, reply) => {
     try {
-        debugger
-        if(request.routerPath == '/login')
+        if(request.routerPath == '/login' || request.routerPath == '/api/banks')
             return
         await request.jwtVerify()
     } catch (err) {
@@ -22,20 +20,19 @@ fastify.addHook("onRequest", async (request, reply) => {
     }
 })
 
-fastify.register(require('./routes/authenticate'));
-fastify.register(require('./routes/users'));
-fastify.register(require('./routes/banks'));
-fastify.register(require('./routes/parameters'));
+fastify.register(require('./routes/authenticate'))
+fastify.register(require('./routes/users'))
+fastify.register(require('./routes/banks'))
+fastify.register(require('./routes/parameters'))
 
 const start = async () => {
     try {
-        await fastify.listen({ port: PORT, host: '127.0.0.1' });
+        await fastify.listen({ port: 5000, host: '127.0.0.1' })
         fastify.log.info(`listening on ${fastify.server.address().port}`)
-
     } catch (err) {
-        fastify.log.error(err);
-        process.exit(1);
+        fastify.log.error(err)
+        process.exit(1)
     }
-};
+}
 
-start();
+start()
