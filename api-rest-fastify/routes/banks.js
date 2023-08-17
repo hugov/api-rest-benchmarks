@@ -17,8 +17,10 @@ async function bankRoutes(fastify, options) {
         await client.query('SELECT * FROM banks')
             .then(results => {
                 const banks = results.rows;
+                const milliseconds = reply.getResponseTime()
                 console.log('results: ' , banks);
-                reply.send(banks);
+                console.log('Tempo processamento: ', milliseconds)
+                reply.send( banks );
             });
 
     });

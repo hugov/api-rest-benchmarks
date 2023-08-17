@@ -27,7 +27,7 @@ fastify.register(require('./routes/parameters'))
 
 const start = async () => {
     try {
-        await fastify.listen({ port: 5000, host: '127.0.0.1' })
+        await fastify.listen({ port: 5000, host: 'api' })
         fastify.log.info(`listening on ${fastify.server.address().port}`)
     } catch (err) {
         fastify.log.error(err)
