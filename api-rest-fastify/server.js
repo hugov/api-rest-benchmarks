@@ -10,6 +10,7 @@ fastify.register(require('@fastify/jwt'), {
     secret: configuration.secretKey
 })
 
+/*
 fastify.addHook("onRequest", async (request, reply) => {
     try {
         if(request.routerPath == '/login' || request.routerPath == '/api/banks')
@@ -19,11 +20,12 @@ fastify.addHook("onRequest", async (request, reply) => {
       reply.send(err)
     }
 })
+*/
 
-fastify.register(require('./routes/authenticate'))
+//fastify.register(require('./routes/authenticate'))
 fastify.register(require('./routes/users'))
-fastify.register(require('./routes/banks'))
-fastify.register(require('./routes/parameters'))
+//fastify.register(require('./routes/banks'))
+//fastify.register(require('./routes/parameters'))
 
 const start = async () => {
     try {

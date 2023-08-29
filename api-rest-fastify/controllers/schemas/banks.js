@@ -1,5 +1,3 @@
-const typeString = { type: 'string' }; // since i will be using this type a lot
-
 const bank = {
   type: 'object',
   properties: {
@@ -66,7 +64,7 @@ const deleteBankSchema = {
     id: { type: 'number' },
   },
   response: {
-    200: typeString,
+    200: { type: 'string' }
   },
 };
 

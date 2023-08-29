@@ -14,6 +14,16 @@ Content-Type: application/json
 ###
 @TOKEN = {{ login.response.body.token }}
 
+### CREATE USER ? public
+POST {{baseUrl}}/api/users/create-user HTTP/1.1
+content-type: application/json
+
+{
+  "email": "hugov1983@gmail.com",
+  "username": "hugov",
+  "password": "hugo123"
+}
+
 ### GET ALL USERS
 GET {{baseUrl}}/api/users HTTP/1.1
 

@@ -1,5 +1,3 @@
-const typeString = { type: 'string' }; // since i will be using this type a lot
-
 const parameter = {
   type: 'object',
   properties: {
@@ -66,7 +64,7 @@ const deleteParameterSchema = {
     id: { type: 'number' },
   },
   response: {
-    200: typeString,
+    200: { type: 'string' }
   },
 };
 

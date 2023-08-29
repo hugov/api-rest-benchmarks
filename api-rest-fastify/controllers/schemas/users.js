@@ -1,11 +1,28 @@
-const typeString = { type: 'string' }; // since i will be using this type a lot
-
 const user = {
   type: 'object',
   properties: {
     id: { type: 'number' },
-    title: typeString,
-    body: typeString,
+    name: { type: 'string' },
+    username: { type: 'string' },
+    password: { type: 'string' },
+    document_type: { type: 'number' },
+    document: { type: 'string' },
+    dob: { type: 'string' },
+    email: { type: 'string' },
+    phone_number: { type: 'string' },
+    mother_name: { type: 'string' },
+    zip_code: { type: 'string' },
+    street: { type: 'string' },
+    number: { type: 'number' },
+    complement: { type: 'string' },
+    city: { type: 'string' },
+    state: { type: 'string' },
+    bank: { type: 'string' },
+    branch: { type: 'number' },
+    account: { type: 'string' },
+    pix_type: { type: 'number' },
+    pix_key: { type: 'string' },
+    status: { type: 'number' },
   },
 };
 
@@ -27,34 +44,90 @@ const getUserSchema = {
   },
 };
 
-const addUserSchema = {
+const createUserSchema = {
   body: {
     type: 'object',
-    required: ['title', 'body'],
+    required: ['username', 'password', 'email'],
     properties: {
-      title: typeString,
-      body: typeString,
+      id: { type: 'number' },
+      username: { type: 'string' },
+      password: { type: 'string' },
+      email: { type: 'string' }
     },
   },
   response: {
-    200: typeString, // sending a simple message as string
+    200: { type: 'string' } // sending a simple message as string
+  },
+};
+
+const addUserSchema = {
+  body: {
+    type: 'object',
+    //required: ['username', 'password'],
+    properties: {
+      id: { type: 'number' },
+      name: { type: 'string' },
+      username: { type: 'string' },
+      password: { type: 'string' },
+      document_type: { type: 'number' },
+      document: { type: 'string' },
+      dob: { type: 'string' },
+      email: { type: 'string' },
+      phone_number: { type: 'string' },
+      mother_name: { type: 'string' },
+      zip_code: { type: 'string' },
+      street: { type: 'string' },
+      number: { type: 'number' },
+      complement: { type: 'string' },
+      city: { type: 'string' },
+      state: { type: 'string' },
+      bank: { type: 'string' },
+      branch: { type: 'number' },
+      account: { type: 'string' },
+      pix_type: { type: 'number' },
+      pix_key: { type: 'string' },
+      status: { type: 'number' },
+    },
+  },
+  response: {
+    200: { type: 'string' } // sending a simple message as string
   },
 };
 
 const updateUserSchema = {
   body: {
     type: 'object',
-    required: ['title', 'body'],
+    //required: ['title', 'body'],
     properties: {
-      title: typeString,
-      body: typeString,
+      id: { type: 'number' },
+      name: { type: 'string' },
+      username: { type: 'string' },
+      password: { type: 'string' },
+      document_type: { type: 'number' },
+      document: { type: 'string' },
+      dob: { type: 'string' },
+      email: { type: 'string' },
+      phone_number: { type: 'string' },
+      mother_name: { type: 'string' },
+      zip_code: { type: 'string' },
+      street: { type: 'string' },
+      number: { type: 'number' },
+      complement: { type: 'string' },
+      city: { type: 'string' },
+      state: { type: 'string' },
+      bank: { type: 'string' },
+      branch: { type: 'number' },
+      account: { type: 'string' },
+      pix_type: { type: 'number' },
+      pix_key: { type: 'string' },
+      status: { type: 'number' },
     },
   },
   params: {
     id: { type: 'number' },
   },
   response: {
-    200: typeString, // a simple message will be sent
+    200: { type: 'string' }
   },
 };
 
@@ -63,11 +136,12 @@ const deleteUserSchema = {
     id: { type: 'number' },
   },
   response: {
-    200: typeString,
+    200: { type: 'string' }
   },
 };
 
 module.exports = {
+  createUserSchema,
   getUsersSchema,
   getUserSchema,
   addUserSchema,
